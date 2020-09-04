@@ -17,6 +17,7 @@ import { Book } from '@tmo/shared/models';
 })
 export class BookSearchComponent implements OnInit {
   books: ReadingListBook[];
+  searchTimer: any;
 
   searchForm = this.fb.group({
     term: ''
@@ -49,14 +50,20 @@ export class BookSearchComponent implements OnInit {
 
   searchExample() {
     this.searchForm.controls.term.setValue('javascript');
-    this.searchBooks();
+    this.searchForBooks();
   }
 
-  searchBooks() {
+  searchForBooks() {
     if (this.searchForm.value.term) {
       this.store.dispatch(searchBooks({ term: this.searchTerm }));
     } else {
       this.store.dispatch(clearSearch());
     }
+  }
+
+  instantSearch(searchString) {
+    clearTimeout(this.searchTimer);
+    this.searchForm.controls.term.setValue(searchString);
+    this.searchTimer = setTimeout(() => this.searchForBooks(), 500);
   }
 }
