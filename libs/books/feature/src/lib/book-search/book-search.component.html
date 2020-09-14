@@ -41,6 +41,7 @@
               (click)="addBookToReadingList(b)"
               [disabled]="b.isAdded"
               [attr.aria-label]="'Add ' + b.title + ' by ' + b.authors.join(',') + ' to reading list'"
+              data-testing="btn-add-book"
             >
               Want to Read
             </button>
