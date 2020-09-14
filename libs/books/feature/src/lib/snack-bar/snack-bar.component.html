@@ -1,0 +1,18 @@
+<div class="snack-bar-container">
+    <p
+    [attr.aria-label]="data.snackText"
+    >{{data.snackText}}</p>
+    <button
+    mat-button color="accent"
+    (click)="dismissSnack()"
+    aria-label="Dismiss">
+      Ok
+    </button>
+    <button 
+    data-testing="btn-undo-snackbar"
+    mat-button color="warn"
+    (click)="onClick(data.actionRequested)"
+    aria-label="Undo">
+      {{data.buttonText}}
+    </button>
+  </div>
