@@ -39,9 +39,10 @@
               color="primary"
               (click)="addBookToReadingList(b)"
               [disabled]="b.isAdded"
-              [attr.aria-label]="'Add ' + b.title + ' by ' + b.authors.join(',') + ' to reading list'"
+              [attr.aria-label]="b.finished ? ('Book ' + b.title + ' by ' + b.authors.join(',') + ' already finished') : ('Add ' + b.title + ' by ' + b.authors.join(',') + ' to reading list')"
+              data-testing="btn-add-book"
             >
-              Want to Read
+              {{ b.finished ? 'Finished!' : 'Want to Read'}}
             </button>
           </div>
         </div>
