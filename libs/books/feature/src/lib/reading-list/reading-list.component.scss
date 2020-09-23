@@ -19,12 +19,17 @@
     flex-direction: column;
     justify-content: center;
   }
+
+  &.item-finished {
+    background: rgba($color: #54c900, $alpha: 0.3);
+  }
 }
 
 .reading-list-item--cover {
   max-width: 36px;
   max-height: 36px;
   margin-right: $spacing-xxs;
+  margin-left: $spacing-xxs;
 }
 
 .reading-list-item--details {
@@ -38,6 +43,12 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.reading-list-item--details--title-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
 }
 
 .empty {

@@ -17,7 +17,9 @@ export class ReadingListService {
       const { id, ...rest } = b;
       list.push({
         bookId: id,
-        ...rest
+        ...rest,
+        finished: false,
+        finishedDate: null,
       });
       return list;
     });
@@ -26,6 +28,19 @@ export class ReadingListService {
   async removeBook(id: string): Promise<void> {
     this.storage.update(list => {
       return list.filter(x => x.bookId !== id);
+    });
+  }
+
+  async finishBook(id: string, param: ReadingListItem): Promise<void> {
+    this.storage.update(list => {
+      const modifiedList = list.map(item => {
+        if(item.bookId === id) {
+          item.finished = param.finished;
+          item.finishedDate = param.finishedDate
+        }
+        return item;
+      });
+      return modifiedList;
     });
   }
 }
