@@ -8,9 +8,11 @@
 
 3. On **libs/books/feature/src/lib/book-search** I think the *formatDate(date: void | string)* method shoul be taken out and replaced for a pipe on the shared lib folder.
 
-4. On **lib/book-search/book-search.component.html** the variable naming is kind of ambiguous leaving just as b, should be changed for something more descriptive.
+4. The *formatDate(date: void | string)* method used is always assuming a valid date string, when an invalid value is provided, it breaks. A *try/finally* should be included in the method to avoid future issues, returning undefined as if no value was provided. 
 
-5. Same issue as point 4, for files on the *reading-list* selector (**+state/reading-list/reading-list.selectors.ts**) and component's HTML (**lib/reading-list/reading-list.component.html**)
+5. On **lib/book-search/book-search.component.html** the variable naming is kind of ambiguous leaving just as b, should be changed for something more descriptive.
+
+6. Same issue as point 4, for files on the *reading-list* selector (**+state/reading-list/reading-list.selectors.ts**) and component's HTML (**lib/reading-list/reading-list.component.html**)
 
 
 ## Accessibility Issues

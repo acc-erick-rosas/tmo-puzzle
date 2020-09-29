@@ -13,7 +13,11 @@ describe('should format a date like mm/dd/yyyy', () => {
         expect(pipe.transform(date)).toBe('12/31/2011');
     })
 
-    it('then it should return an undefined value', () => {
+    it('then it should return undefined when no value provided', () => {
         expect(pipe.transform()).toBe(undefined);
+    })
+
+    it('then it should return undefined on invalid date values', () => {
+        expect(pipe.transform('Hello there')).toBe(undefined);
     })
 })
