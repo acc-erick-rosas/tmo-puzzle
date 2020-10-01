@@ -17,7 +17,6 @@ export class BooksService {
       .pipe(
         map((resp) => {
           if (resp.data.totalItems > 0) {
-            console.log('SOOOOO OH AHHHHHHH :: ', resp);
             return resp.data.items.map((item) => {
               return {
                 id: item.id,

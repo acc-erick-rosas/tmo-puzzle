@@ -23,11 +23,8 @@ describe('When: Use the search feature', () => {
     );
 
     // TODO: Implement this test!
-    const form = await $('form');
     const input = await $('input[type="search"]');
-    await input.sendKeys('javas');
-    await(setTimeout(() => {}, 600));
-
+    await input.sendKeys('java');
     const items = await $$('[data-testing="book-item"]');
     expect(items.length).toBeGreaterThan(1);
   });
