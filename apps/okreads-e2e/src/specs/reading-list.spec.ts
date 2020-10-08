@@ -28,7 +28,7 @@ describe('When: Using the snackbar', () => {
 
     const input = await $('input[type="search"]');
     const openReadingList = await $('[data-testing="toggle-reading-list"]');
-    const btnUndo = await $('[data-testing="btn-undo-snackbar"]');
+    const form = await $('form');
 
     await openReadingList.click();
     let readingItemList = await $$('[data-testing="reading-list-item"]');
@@ -36,23 +36,20 @@ describe('When: Using the snackbar', () => {
     const closeReadingList = await $('[data-testing="close-reading-list"]');
       await closeReadingList.click();
       await input.sendKeys('javascript');
-      await browser.sleep(600);
+      form.submit();
       const bookItemList = await $$('[data-testing="add-book-item"]');
       if(bookItemList) {
         await bookItemList[0].click();
-        await browser.sleep(600);
         await openReadingList.click();
       }
     }
-    await browser.sleep(600);
     readingItemList = await $$('[data-testing="reading-list-item"]');
     const initList = readingItemList;
     if(readingItemList.length > 0) {
       const btnRemoveBook = await $$('[data-testing="btn-remove-book"]');
       await btnRemoveBook[0].click();
-      await browser.sleep(600);
+      const btnUndo = await $('[data-testing="btn-undo-snackbar"]');
       btnUndo.click();
-      await browser.sleep(600);
       readingItemList = await $$('[data-testing="reading-list-item"]');
       expect(readingItemList.length).toBe(initList.length);
     }

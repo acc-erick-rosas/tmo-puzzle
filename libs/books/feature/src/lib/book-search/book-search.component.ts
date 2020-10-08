@@ -65,20 +65,14 @@ export class BookSearchComponent implements OnInit {
 
   searchExample() {
     this.searchForm.controls.term.setValue('javascript');
-    this.searchForBooks();
+    this.searchBooks();
   }
 
-  searchForBooks() {
+  searchBooks() {
     if (this.searchForm.value.term) {
       this.store.dispatch(searchBooks({ term: this.searchTerm }));
     } else {
       this.store.dispatch(clearSearch());
     }
-  }
-
-  instantSearch(searchString) {
-    clearTimeout(this.searchTimer);
-    this.searchForm.controls.term.setValue(searchString);
-    this.searchTimer = setTimeout(() => this.searchForBooks(), 500);
   }
 }

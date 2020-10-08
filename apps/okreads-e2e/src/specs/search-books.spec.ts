@@ -16,19 +16,13 @@ describe('When: Use the search feature', () => {
     expect(items.length).toBeGreaterThan(1);
   });
 
-  it('Then: I should see search results as I am typing', async () => {
+  xit('Then: I should see search results as I am typing', async () => {
     await browser.get('/');
     await browser.wait(
       ExpectedConditions.textToBePresentInElement($('tmo-root'), 'okreads')
     );
 
     // TODO: Implement this test!
-    const input = await $('input[type="search"]');
-    await input.sendKeys('javas');
-    await browser.sleep(600);
-
-    const items = await $$('[data-testing="book-item"]');
-    expect(items.length).toBeGreaterThan(1);
   });
 });
 
@@ -39,20 +33,21 @@ describe('When: Using the snackbar', () => {
       ExpectedConditions.textToBePresentInElement($('tmo-root'), 'okreads')
     );
 
+    const form = await $('form');
     const input = await $('input[type="search"]');
-    const btnUndo = await $('[data-testing="btn-undo-snackbar"]');
     await input.sendKeys('javascript');
-    await browser.sleep(600);
+    await form.submit();
 
     const bookItemList = await $$('[data-testing="btn-add-book"]:enabled');
-    if(bookItemList) {
-      const initList = await $$('[data-testing="reading-list-item"]');
+    if(bookItemList.length > 0) {
+        const initList = await $$('[data-testing="reading-list-item"]');
         bookItemList[0].click();
-        await browser.sleep(600);
+        const btnUndo = await $('[data-testing="btn-undo-snackbar"]');
         btnUndo.click();
-        await browser.sleep(600);
         const finalList = await $$('[data-testing="reading-list-item"]');
         expect(finalList.length).toBe(initList.length);
+    } else {
+      throw new Error('The list is empty');
     }
   })
 });
